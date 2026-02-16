@@ -1,5 +1,6 @@
 package heap
 
+
 type Heap struct {
 	items []int
 }
@@ -75,3 +76,20 @@ func (h *Heap) bubbleDown(index int) {
 func (h *Heap) swap(i, j int) {
 	h.items[i], h.items[j] = h.items[j], h.items[i]
 }
+
+/*
+Understanding the relationship between array elements and parents child relationships.
+					2
+			3				4
+		6		7		9		11
+
+  0,		1,		2,		3,   	4,  	5,  	6,  	7
+  2,		3,		4,		6,		7,		9,		11
+
+parent - i
+leftChild - 2i + 1
+rightChild - 2i + 2
+
+for a given i, parent - (i - 1) / 2
+
+*/
