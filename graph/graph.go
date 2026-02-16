@@ -1,6 +1,9 @@
 package graph
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 type Graph struct {
 	nodes map[int]map[int]bool
@@ -88,4 +91,62 @@ func (g *Graph) Print() {
 		}
 		fmt.Println()
 	}
+}
+
+func (g *Graph) PrettyPrint() {
+	if len(g.nodes) == 0 {
+		fmt.Println("(empty graph)")
+		return
+	}
+	nodes := make([]int, 0, len(g.nodes))
+	for n := range g.nodes {
+		nodes = append(nodes, n)
+	}
+	sort.Ints(nodes)
+	fmt.Println("Nodes:", nodes)
+	seenUndirected := make(map[string]bool)
+	fmt.Print("Edges: ")
+	first := true
+	for _, from := range nodes {
+		for to := range g.nodes[from] {
+			if from == to {
+				continue
+			}
+			back := g.nodes[to][from]
+			if back {
+				key := fmt.Sprintf("%d-%d", minInt(from, to), maxInt(from, to))
+				if seenUndirected[key] {
+					continue
+				}
+				seenUndirected[key] = true
+				if !first {
+					fmt.Print(", ")
+				}
+				fmt.Printf("%d -- %d", minInt(from, to), maxInt(from, to))
+			} else {
+				if !first {
+					fmt.Print(", ")
+				}
+				fmt.Printf("%d -> %d", from, to)
+			}
+			first = false
+		}
+	}
+	if first {
+		fmt.Print("(none)")
+	}
+	fmt.Println()
+}
+
+func minInt(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
+func maxInt(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }

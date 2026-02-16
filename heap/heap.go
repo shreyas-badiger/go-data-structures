@@ -1,5 +1,9 @@
 package heap
 
+import (
+	"fmt"
+	"strings"
+)
 
 type Heap struct {
 	items []int
@@ -33,6 +37,49 @@ func (h *Heap) Pop() int {
 
 func (h *Heap) Size() int {
 	return len(h.items)
+}
+
+func (h *Heap) Print() {
+	fmt.Println(h.items)
+}
+
+func (h *Heap) PrettyPrint() {
+	if len(h.items) == 0 {
+		fmt.Println("(empty heap)")
+		return
+	}
+	hght := heapHeight(len(h.items))
+	cellW := 5
+	width := cellW * (1 << hght)
+	for level := 0; level < hght; level++ {
+		start := (1 << level) - 1
+		count := 1 << level
+		if start >= len(h.items) {
+			break
+		}
+		if start+count > len(h.items) {
+			count = len(h.items) - start
+		}
+		slotW := width >> level
+		var line string
+		for c := 0; c < count && start+c < len(h.items); c++ {
+			s := fmt.Sprintf("[%d]", h.items[start+c])
+			pad := slotW - len(s)
+			line += strings.Repeat(" ", pad/2) + s + strings.Repeat(" ", (pad+1)/2)
+		}
+		fmt.Println(strings.TrimRight(line, " "))
+	}
+}
+
+func heapHeight(n int) int {
+	if n <= 0 {
+		return 0
+	}
+	h := 0
+	for (1 << h) <= n {
+		h++
+	}
+	return h
 }
 
 // Internal: helper to move up the node to its right place

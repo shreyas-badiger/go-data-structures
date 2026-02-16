@@ -6,7 +6,7 @@ A small Go module with a few common data structures: graph (adjacency list), min
 
 - **Graph** (`graph`) – Adjacency list graph. Supports directed and undirected edges, add/delete nodes and edges, get neighbors.
 - **Heap** (`heap`) – Min-heap (array-based). Push and pop the minimum element.
-- **Queue** (`queues`) – FIFO queue of nodes (struct with `Val` and `Neighbors`). Add, Remove, Front, IsEmpty, Size.
+- **Queue** (`queue`) – FIFO queue of nodes (struct with `Val` and `Neighbors`). Add, Remove, Front, IsEmpty, Size.
 - **Stack** (`stack`) – LIFO stack of integers. Push, Pop, Size, IsEmpty.
 
 ## Usage
@@ -23,7 +23,7 @@ Then import the packages you need (import path and package name are both lowerca
 import (
     "github.com/shreyas-badiger/go-data-structures/graph"
     "github.com/shreyas-badiger/go-data-structures/heap"
-    "github.com/shreyas-badiger/go-data-structures/queues"
+    "github.com/shreyas-badiger/go-data-structures/queue"
     "github.com/shreyas-badiger/go-data-structures/stack"
 )
 
@@ -46,9 +46,9 @@ func main() {
     g.AddDirectedEdge(1, 3)
     neighbors := g.GetNeighbors(1)
 
-    // Queue (holds *queues.Node)
-    q := queues.NewQueue()
-    q.Add(&queues.Node{Val: 42})
+    // Queue (holds *queue.Node)
+    q := queue.NewQueue()
+    q.Add(&queue.Node{Val: 42})
     node := q.Remove()
 }
 ```

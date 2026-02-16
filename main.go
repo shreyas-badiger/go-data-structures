@@ -5,7 +5,7 @@ import (
 
 	"github.com/shreyas-badiger/go-data-structures/graph"
 	"github.com/shreyas-badiger/go-data-structures/heap"
-	"github.com/shreyas-badiger/go-data-structures/queues"
+	"github.com/shreyas-badiger/go-data-structures/queue"
 	"github.com/shreyas-badiger/go-data-structures/stack"
 )
 
@@ -35,8 +35,8 @@ func main() {
 	g.Print()
 
 	fmt.Println("Queue:")
-	q := queues.NewQueue()
-	q.Add(&queues.Node{Val: 1, Neighbors: nil})
-	q.Add(&queues.Node{Val: 2, Neighbors: nil})
+	q := queue.NewQueue()
+	q.Add(&queue.Node{Val: 1, Neighbors: nil})
+	q.Add(&queue.Node{Val: 2, Neighbors: nil})
 	fmt.Println(q.Remove().Val, q.Remove().Val)
 }
