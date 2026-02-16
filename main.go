@@ -10,33 +10,29 @@ import (
 )
 
 func main() {
-	fmt.Println("Stack:")
+	fmt.Println("\n\nStack:")
 	s := stack.New()
 	s.Push(10)
 	s.Push(20)
 	s.Push(30)
-	for v, ok := s.Pop(); ok; v, ok = s.Pop() {
-		fmt.Println(v)
-	}
+	s.PrettyPrint()
 
-	fmt.Println("Heap:")
+	fmt.Println("\n\nHeap:")
 	h := heap.NewHeap()
 	h.Push(5)
 	h.Push(2)
 	h.Push(8)
-	for h.Size() > 0 {
-		fmt.Println(h.Pop())
-	}
+	h.PrettyPrint()
 
-	fmt.Println("Graph:")
+	fmt.Println("\n\nGraph:")
 	g := graph.NewGraph()
 	g.AddUndirectedEdge(1, 2)
 	g.AddUndirectedEdge(1, 3)
-	g.Print()
+	g.PrettyPrint()
 
-	fmt.Println("Queue:")
+	fmt.Println("\n\nQueue:")
 	q := queue.NewQueue()
 	q.Add(&queue.Node{Val: 1, Neighbors: nil})
 	q.Add(&queue.Node{Val: 2, Neighbors: nil})
-	fmt.Println(q.Remove().Val, q.Remove().Val)
+	q.PrettyPrint()
 }
