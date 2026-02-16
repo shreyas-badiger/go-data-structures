@@ -52,14 +52,15 @@ func (g *Graph) DeleteNode(node int) {
 		return
 	}
 
-	// remove node from all its neighbors
+	// remove this node from all its neighbors' adjacency lists
 	for neighbor := range g.nodes[node] {
-		delete(g.nodes[neighbor], neighbor)
+		delete(g.nodes[neighbor], node)
 	}
 
 	delete(g.nodes, node)
 }
 
+// DeleteEdge removes the edge between node1 and node2 (both directions for undirected).
 func (g *Graph) DeleteEdge(node1, node2 int) {
 	if _, exists := g.nodes[node1]; !exists {
 		return
@@ -67,9 +68,16 @@ func (g *Graph) DeleteEdge(node1, node2 int) {
 	if _, exists := g.nodes[node2]; !exists {
 		return
 	}
-
 	delete(g.nodes[node1], node2)
 	delete(g.nodes[node2], node1)
+}
+
+// DeleteDirectedEdge removes only the edge from node1 to node2.
+func (g *Graph) DeleteDirectedEdge(node1, node2 int) {
+	if _, exists := g.nodes[node1]; !exists {
+		return
+	}
+	delete(g.nodes[node1], node2)
 }
 
 func (g *Graph) Print() {

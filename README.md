@@ -1,2 +1,66 @@
 # go-data-structures
-Go module for data structures.
+
+A small Go module with a few common data structures: graph (adjacency list), min-heap, queue, and stack. Use it as a dependency or copy the packages you need.
+
+## Data structures
+
+- **Graph** (`Graphs`) – Adjacency list graph. Supports directed and undirected edges, add/delete nodes and edges, get neighbors.
+- **Heap** (`Heap`) – Min-heap (array-based). Push and pop the minimum element.
+- **Queue** (`Queues`) – FIFO queue of nodes (struct with `Val` and `Neighbors`). Add, Remove, Front, IsEmpty, Size.
+- **Stack** (`Stack`) – LIFO stack of integers. Push, Pop, Size, IsEmpty.
+
+## Usage
+
+Add the module to your project:
+
+```bash
+go get github.com/shreyas-badiger/go-data-structures
+```
+
+Then import the packages you need. Package names are lowercase (`graphs`, `heap`, `queues`, `stack`); import paths use the directory names (`Graphs`, `Heap`, `Queues`, `Stack`).
+
+```go
+import (
+    "github.com/shreyas-badiger/go-data-structures/Graphs"
+    "github.com/shreyas-badiger/go-data-structures/Heap"
+    "github.com/shreyas-badiger/go-data-structures/Queues"
+    "github.com/shreyas-badiger/go-data-structures/Stack"
+)
+
+func main() {
+    // Stack
+    s := stack.New()
+    s.Push(1)
+    s.Push(2)
+    v, ok := s.Pop()  // 2, true
+
+    // Min-heap
+    h := heap.NewHeap()
+    h.Push(5)
+    h.Push(2)
+    min, ok := h.Pop()  // 2, true
+
+    // Graph
+    g := graphs.NewGraph()
+    g.AddUndirectedEdge(1, 2)
+    g.AddDirectedEdge(1, 3)
+    neighbors := g.GetNeighbors(1)
+
+    // Queue (holds *queues.Node)
+    q := queues.NewQueue()
+    q.Add(&queues.Node{Val: 42})
+    node := q.Remove()
+}
+```
+
+## Tests
+
+From the repo root:
+
+```bash
+go test ./...
+```
+
+## Module path
+
+If you fork or rename the repo, update the module in `go.mod` (e.g. `module github.com/yourname/go-data-structures`) and use the same path in your imports.

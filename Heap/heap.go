@@ -13,22 +13,21 @@ func (h *Heap) Push(value int) {
 	h.bubbleUp(len(h.items) - 1)
 }
 
-// minHeap should always pop the least possible element.
-func (h *Heap) Pop(value int) int {
-
+// Pop removes and returns the minimum element. Second return is false if heap was empty.
+func (h *Heap) Pop() (int, bool) {
+	if len(h.items) == 0 {
+		return 0, false
+	}
 	rootIndex, lastIndex := 0, len(h.items)-1
 	rootNode, lastNode := h.items[rootIndex], h.items[lastIndex]
 
-	// Copy the last node to first node and reduce the size.
 	h.items[rootIndex] = lastNode
 	h.items = h.items[:lastIndex]
 
-	// Only bubble down if there are elements left in the heap
-	if h.Size() > 0 {
+	if len(h.items) > 0 {
 		h.bubbleDown(rootIndex)
 	}
-
-	return rootNode
+	return rootNode, true
 }
 
 func (h *Heap) Size() int {
