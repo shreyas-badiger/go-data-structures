@@ -13,33 +13,30 @@ func TestHeapPushPop(t *testing.T) {
 	if h.Size() != 4 {
 		t.Errorf("Size: got %d, want 4", h.Size())
 	}
-	v, ok := h.Pop()
-	if !ok || v != 1 {
-		t.Errorf("Pop: got %d, %v; want 1, true", v, ok)
+	v := h.Pop()
+	if v != 1 {
+		t.Errorf("Pop: got %d, want 1", v)
 	}
-	v, ok = h.Pop()
-	if !ok || v != 2 {
-		t.Errorf("Pop: got %d, %v; want 2, true", v, ok)
+	v = h.Pop()
+	if v != 2 {
+		t.Errorf("Pop: got %d, want 2", v)
 	}
-	v, ok = h.Pop()
-	if !ok || v != 5 {
-		t.Errorf("Pop: got %d, %v; want 5, true", v, ok)
+	v = h.Pop()
+	if v != 5 {
+		t.Errorf("Pop: got %d, want 5", v)
 	}
-	v, ok = h.Pop()
-	if !ok || v != 8 {
-		t.Errorf("Pop: got %d, %v; want 8, true", v, ok)
+	v = h.Pop()
+	if v != 8 {
+		t.Errorf("Pop: got %d, want 8", v)
 	}
-	v, ok = h.Pop()
-	if ok {
-		t.Errorf("Pop on empty heap: got ok=true, want false")
-	}
+	_ = h.Pop() // empty heap returns 0
 }
 
 func TestHeapEmpty(t *testing.T) {
 	h := NewHeap()
-	_, ok := h.Pop()
-	if ok {
-		t.Error("Pop on empty heap should return ok=false")
+	v := h.Pop()
+	if v != 0 {
+		t.Errorf("Pop on empty heap: got %d, want 0", v)
 	}
 	if h.Size() != 0 {
 		t.Errorf("empty heap Size: got %d", h.Size())
@@ -54,10 +51,7 @@ func TestHeapOrder(t *testing.T) {
 	var prev int
 	first := true
 	for h.Size() > 0 {
-		v, ok := h.Pop()
-		if !ok {
-			t.Fatal("unexpected ok=false")
-		}
+		v := h.Pop()
 		if !first && v < prev {
 			t.Errorf("min-heap order violated: %d after %d", v, prev)
 		}

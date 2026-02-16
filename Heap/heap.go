@@ -13,10 +13,10 @@ func (h *Heap) Push(value int) {
 	h.bubbleUp(len(h.items) - 1)
 }
 
-// Pop removes and returns the minimum element. Second return is false if heap was empty.
-func (h *Heap) Pop() (int, bool) {
+// Pop removes and returns the minimum element.
+func (h *Heap) Pop() int {
 	if len(h.items) == 0 {
-		return 0, false
+		return 0
 	}
 	rootIndex, lastIndex := 0, len(h.items)-1
 	rootNode, lastNode := h.items[rootIndex], h.items[lastIndex]
@@ -27,7 +27,7 @@ func (h *Heap) Pop() (int, bool) {
 	if len(h.items) > 0 {
 		h.bubbleDown(rootIndex)
 	}
-	return rootNode, true
+	return rootNode
 }
 
 func (h *Heap) Size() int {
@@ -75,21 +75,3 @@ func (h *Heap) bubbleDown(index int) {
 func (h *Heap) swap(i, j int) {
 	h.items[i], h.items[j] = h.items[j], h.items[i]
 }
-
-/*
-
-Understanding the relationship between array elements and parents child relationships.
-					2
-			3				4
-		6		7		9		11
-
-  0,		1,		2,		3,   	4,  	5,  	6,  	7
-  2,		3,		4,		6,		7,		9,		11
-
-parent - i
-leftChild - 2i + 1
-rightChild - 2i + 2
-
-for a given i, parent - (i - 1) / 2
-
-*/

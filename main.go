@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 
-	"github.com/shreyas-badiger/go-data-structures/Graphs"
-	"github.com/shreyas-badiger/go-data-structures/Heap"
-	"github.com/shreyas-badiger/go-data-structures/Queues"
-	"github.com/shreyas-badiger/go-data-structures/Stack"
+	"github.com/shreyas-badiger/go-data-structures/graph"
+	"github.com/shreyas-badiger/go-data-structures/heap"
+	"github.com/shreyas-badiger/go-data-structures/queues"
+	"github.com/shreyas-badiger/go-data-structures/stack"
 )
 
 func main() {
@@ -24,12 +24,12 @@ func main() {
 	h.Push(5)
 	h.Push(2)
 	h.Push(8)
-	for v, ok := h.Pop(); ok; v, ok = h.Pop() {
-		fmt.Println(v)
+	for h.Size() > 0 {
+		fmt.Println(h.Pop())
 	}
 
 	fmt.Println("Graph:")
-	g := graphs.NewGraph()
+	g := graph.NewGraph()
 	g.AddUndirectedEdge(1, 2)
 	g.AddUndirectedEdge(1, 3)
 	g.Print()
